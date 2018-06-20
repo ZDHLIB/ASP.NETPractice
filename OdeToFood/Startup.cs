@@ -18,8 +18,9 @@ namespace OdeToFood
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IGreeter, Greeter>();
-            services.AddTransient<IGreeter, Greeter>();  // Lazy creation, create instance when needed
-            services.AddScoped<IGreeter, Greeter>(); // Create a instance per http request.
+            services.AddMvc();
+            //services.AddTransient<IGreeter, Greeter>();  // Lazy creation, create instance when needed
+            //services.AddScoped<IGreeter, Greeter>(); // Create a instance per http request.
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -29,33 +30,40 @@ namespace OdeToFood
                               IGreeter greeter,
                               ILogger<Startup> logger)
         {
-            if (env.IsDevelopment())
-            {
+            if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
             }
+            //else {
+            //    app.UseExceptionHandler();
+            //}
 
-            app.Use(next => {
-                // middleware, run once when start up
-                return async context => {
-                    logger.LogInformation("Request incoming");
-                    if (context.Request.Path.StartsWithSegments("/start")) {
-                        await context.Response.WriteAsync("Hit!!");
-                        logger.LogInformation("Request handled");
-                    } else {
-                        await next(context);
-                        logger.LogInformation("Request outgoing");
-                    }
-                };
-            });
+            //app.Use(next => {
+            //    // middleware, run once when start up
+            //    return async context => {
+            //        logger.LogInformation("Request incoming");
+            //        if (context.Request.Path.StartsWithSegments("/start")) {
+            //            await context.Response.WriteAsync("Hit!!");
+            //            logger.LogInformation("Request handled");
+            //        } else {
+            //            await next(context);
+            //            logger.LogInformation("Request outgoing");
+            //        }
+            //    };
+            //});
 
-            app.UseWelcomePage(new WelcomePageOptions {
-                Path = "/pathPattern"
-            });
+            //app.UseWelcomePage(new WelcomePageOptions {
+            //    Path = "/pathPattern"
+            //});
+            
+            app.UseStaticFiles();
 
-            app.Run(async (context) =>
-            {
+            // map request to a method on a class
+            app.UseMvcWithDefaultRoute();
+
+            app.Run(async (context) => {
                 var greeting = greeter.GetMessage();
-                await context.Response.WriteAsync(greeting);
+                //await context.Response.WriteAsync(greeting);            
+                await context.Response.WriteAsync($"{greeting}:{env.EnvironmentName}");
             });
         }
     }
