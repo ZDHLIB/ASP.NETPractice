@@ -1,15 +1,20 @@
-﻿@model IEnumerable<OdeToFood.Models.Restaurant>
+﻿@model OdeToFood.ViewModels.HomeIndexViewModel
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
 </head>
 <body>
+    <h1>@Model.CurrentMessage</h1>
     <table>
-        @foreach (var resturant in Model) {
+        @foreach (var resturant in Model.Restaurants) {
             <tr>
                 <td>@resturant.Id</td>
                 <td>@resturant.Name</td>
+                <td>
+                    @*<a href="/home/details/@resturant.Id">Details</a>*@
+                    @Html.ActionLink("Go", "Details", new {id=resturant.Id});
+                </td>
             </tr>
         }
     </table>

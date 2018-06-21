@@ -15,7 +15,7 @@ namespace OdeToFood
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IGreeter, Greeter>();
-            services.AddScoped<IResturantData, RestaurantService>();
+            services.AddScoped<IRestaurantData, RestaurantService>();
             services.AddMvc();
             //services.AddTransient<IGreeter, Greeter>();  // Lazy creation, create instance when needed
             //services.AddScoped<IGreeter, Greeter>(); // Create a instance per http request.

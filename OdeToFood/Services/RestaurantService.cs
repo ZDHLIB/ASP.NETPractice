@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OdeToFood.Services
 {
-    public class RestaurantService : IResturantData
+    public class RestaurantService : IRestaurantData
     {
         public RestaurantService() { 
             _restaurants = new List<Restaurant> {
@@ -18,6 +18,10 @@ namespace OdeToFood.Services
 
         public IEnumerable<Restaurant> GetAll() {
             return _restaurants.OrderBy(r => r.Name);
+        }
+
+        public Restaurant Get(int id) {
+            return _restaurants.FirstOrDefault(r => r.Id==id);
         }
 
         List<Restaurant> _restaurants;

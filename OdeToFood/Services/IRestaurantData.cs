@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace OdeToFood.Services
 {
-    public interface IResturantData
+    public interface IRestaurantData
     {
         IEnumerable<Restaurant> GetAll();
+        Restaurant Get(int id);
     }
 }
