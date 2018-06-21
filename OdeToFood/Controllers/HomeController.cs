@@ -36,5 +36,13 @@ namespace OdeToFood.Controllers
             }
             return View(model);
         }
+
+        public IActionResult Create() {
+            return View();
+        }
+
+        public IActionResult Create(Restaurant restaurant) {
+            return View();
+        }
     }
 }
