@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace OdeToFood.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class HomeController : Controller
     {
         private IRestaurantData _resturantData;
@@ -21,7 +21,7 @@ namespace OdeToFood.Controllers
             _greeter = greeter;
         }
 
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public IActionResult Index() {
             //var model = new Restaurant { Id = 1, Name = "Zac" };
             //return new ObjectResult(model);
