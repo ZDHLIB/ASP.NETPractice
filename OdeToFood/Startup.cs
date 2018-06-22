@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using OdeToFood.Data;
+using OdeToFood.Middleware;
 using OdeToFood.Services;
 
 namespace OdeToFood
@@ -65,18 +67,21 @@ namespace OdeToFood
             //app.UseWelcomePage(new WelcomePageOptions {
             //    Path = "/pathPattern"
             //});
-            
+
+            // redirect regular HTTP request to SSL version of the same URL
+            app.UseRewriter(new RewriteOptions().AddRedirectToHttpsPermanent());
+
+            app.UseStaticFiles();
+
+            app.UserNodeModules(env.ContentRootPath);
+
+            app.UseAuthentication();
+
             app.UseMvc(ConfigureRoutes);
 
             // map request to a method on a class
             app.UseMvcWithDefaultRoute();
 
-            app.Run(async (context) => {
-                var greeting = greeter.GetMessage();
-                //await context.Response.WriteAsync(greeting);   
-                context.Response.ContentType = "text/plain";
-                await context.Response.WriteAsync($"Not found...");
-            });
         }
 
         private void ConfigureRoutes(IRouteBuilder routeBuilder) {
