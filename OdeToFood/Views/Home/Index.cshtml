@@ -8,23 +8,19 @@
 }
 
 <h1>@Model.CurrentMessage</h1>
-<table>
-    @foreach (var restaurant in Model.Restaurants) {
-        <tr>
-            <td>@restaurant.Id</td>
-            <td>@restaurant.Name</td>
-            <td>
-                <a href="/home/details/@restaurant.Id">Details</a>
-                @Html.ActionLink("Go", "Details", new {id= restaurant.Id});
-                @*asp-route-${parameter name}*@
-                <a asp-controller="Home" asp-action="Details" asp-route-id="@restaurant.Id">More</a>
-                <a asp-page="/Restaurants/Edit" asp-route-id="@restaurant.Id">Edit</a>
-            </td>
-        </tr>
-    }
-</table>
-<a asp-action="Create" asp-controller="Home">Add Restaurant</a>
 
-@section footer{ 
-    @Model.CurrentMessage
+@*Using partial view*@
+@foreach(var restaurant in Model.Restaurants) {
+    @Html.Partial("_Summary", restaurant);
+
 }
+
+<div>
+    <a asp-action="Create" asp-controller="Home">Add Restaurant</a>
+</div>
+
+<div>
+    @section footer{
+        @Model.CurrentMessage
+    }
+</div>
