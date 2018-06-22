@@ -28,7 +28,7 @@ namespace OdeToFood
             //services.AddDbContext<OdeToFoodDbContext>(
             //    options => options.UseSqlServer(_configuration.GetConnectionString("OdeToFood")));
             //services.AddScoped<IRestaurantData, SqlRestaurantData>();
-            services.AddScoped<IRestaurantData, RestaurantService>();
+            services.AddSingleton<IRestaurantData, RestaurantService>();
             services.AddMvc();
             //services.AddTransient<IGreeter, Greeter>();  // Lazy creation, create instance when needed
             //services.AddScoped<IGreeter, Greeter>(); // Create a instance per http request.

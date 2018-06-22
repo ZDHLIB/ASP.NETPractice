@@ -30,6 +30,13 @@ namespace OdeToFood.Services
             return restaurant;
         }
 
+        public Restaurant Update(Restaurant restaurant) {
+            Restaurant restaurant2 = _restaurants.FirstOrDefault(r => r.Id == restaurant.Id);
+            restaurant2.Name = restaurant.Name;
+            restaurant2.Cuisine = restaurant.Cuisine;
+            return restaurant2;
+        }
+
         List<Restaurant> _restaurants;
     }
 
