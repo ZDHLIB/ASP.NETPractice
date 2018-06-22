@@ -11,6 +11,8 @@
     </div>
     <footer>
         @RenderSection("footer", required: false); <!-- false: optional, true:required-->
+        @*@await Component.InvokeAsync("Greeter");*@
+        <vc:greeter></vc:greeter>  @*greeter is the name of view component*@
     </footer>
 </body>
 </html>
