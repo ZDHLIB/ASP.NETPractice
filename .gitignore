@@ -1,0 +1,6 @@
+/.vs
+/OdeToFood/obj/
+/OdeToFood/bin
+*.cache
+*.ide-shm
+*.ide-wal
