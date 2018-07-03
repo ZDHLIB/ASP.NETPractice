@@ -1,7 +1,8 @@
 /.vs
 /OdeToFood/obj/
 /OdeToFood/bin
-*.*.*.cache
-*.*.cache
+OdeToFoodMVC.csproj.CoreCompileInputs.cache
+OdeToFoodMVC.Tests.csproj.CoreCompileInputs.cache
+OdeToFoodMVC.Tests.csprojAssemblyReference.cache
 *.ide-shm
 *.ide-wal
